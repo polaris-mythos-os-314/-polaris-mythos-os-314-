@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vortexandria Polis · Bibliothèque Universelle</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,600;1,7..72,300;1,7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1a1f2e;
+  --ink2:#0d1018;
+  --paper:#f7f5f0;
+  --warm:#ede8df;
+  --rule:#d4cec4;
+  --rule-light:#e8e4de;
+  --amber:#c9820a;
+  --amber-light:#f5e8cc;
+  --amber-pale:#fdf6ea;
+  --cyan:#0a7c8c;
+  --cyan-light:#d0edf0;
+  --green:#1a7a4a;
+  --green-light:#d0eede;
+  --red:#a02020;
+  --red-light:#f5dada;
+  --purple:#5b3a8c;
+  --purple-light:#e8defc;
+  --blue:#1a4a8c;
+  --blue-light:#d0e0f5;
+  --smoke:#8a9080;
+  --text:#2a2f3e;
+  --text-mid:#5a6070;
+  --text-light:#8a9080;
+}
+body{
+  font-family:'Literata',Georgia,serif;
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+}
+
+/* ── MASTHEAD ────────────────────────────────── */
+.masthead{
+  background:var(--ink);
+  color:white;
+  padding:0 60px;
+  border-bottom:3px solid var(--amber);
+}
+.masthead-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.library-mark{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.library-glyph{
+  width:44px;height:44px;
+  border:2px solid var(--amber);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
+  color:var(--amber);letter-spacing:-1px;
+}
+.library-name{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:18px;
+  letter-spacing:0.04em;color:white;
+}
+.library-city{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.25em;color:rgba(255,255,255,0.4);margin-top:2px;
+}
+.masthead-nav{
+  display:flex;gap:28px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:0.1em;color:rgba(255,255,255,0.5);
+}
+.masthead-nav span{cursor:pointer;transition:color 0.2s;}
+.masthead-nav span:hover{color:var(--amber);}
+.masthead-nav span.active{color:var(--amber);}
+
+/* ── HERO ─────────────────────────────────────── */
+.hero{
+  background:var(--ink2);
+  color:white;
+  padding:64px 60px 48px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-80px;right:-80px;
+  width:400px;height:400px;
+  border:1px solid rgba(201,130,10,0.12);
+  border-radius:50%;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  top:-40px;right:-40px;
+  width:240px;height:240px;
+  border:1px solid rgba(201,130,10,0.08);
+  border-radius:50%;
+}
+.hero-classif{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.3em;color:var(--amber);margin-bottom:16px;
+}
+.hero-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:52px;
+  line-height:1.0;margin-bottom:8px;
+  position:relative;z-index:1;
+}
+.hero-title em{
+  color:var(--amber);font-style:normal;
+}
+.hero-sub{
+  font-family:'Literata',serif;font-style:italic;
+  font-size:17px;color:rgba(255,255,255,0.55);
+  margin-bottom:36px;
+}
+.hero-stats{
+  display:flex;gap:48px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:28px;
+}
+.stat{
+  display:flex;flex-direction:column;gap:4px;
+}
+.stat-n{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:32px;color:white;
+}
+.stat-l{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.15em;color:rgba(255,255,255,0.4);
+}
+
+/* ── SEARCH ───────────────────────────────────── */
+.search-bar-wrap{
+  background:white;
+  border-bottom:1px solid var(--rule);
+  padding:20px 60px;
+  display:flex;align-items:center;gap:16px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(26,31,46,0.06);
+}
+.search-icon{color:var(--text-light);font-size:14px;}
+.search-input{
+  flex:1;border:none;outline:none;
+  font-family:'Literata',serif;font-size:15px;
+  color:var(--text);background:transparent;
+}
+.search-input::placeholder{color:var(--rule);}
+.search-count{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-light);white-space:nowrap;
+}
+
+/* ── FILTERS ──────────────────────────────────── */
+.filters-wrap{
+  padding:16px 60px;
+  display:flex;gap:8px;flex-wrap:wrap;
+  background:var(--warm);
+  border-bottom:1px solid var(--rule);
+}
+.filter-pill{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:5px 14px;border-radius:20px;cursor:pointer;
+  border:1px solid var(--rule);background:white;
+  color:var(--text-mid);transition:0.15s;
+  letter-spacing:0.05em;
+}
+.filter-pill:hover{border-color:var(--amber);color:var(--amber);}
+.filter-pill.active{
+  background:var(--ink);color:white;border-color:var(--ink);
+}
+.filter-pill[data-cat="formation"].active{background:var(--amber);border-color:var(--amber);}
+.filter-pill[data-cat="psychohistoire"].active{background:var(--purple);border-color:var(--purple);}
+.filter-pill[data-cat="geopolitique"].active{background:var(--cyan);border-color:var(--cyan);}
+.filter-pill[data-cat="saga"].active{background:var(--red);border-color:var(--red);}
+.filter-pill[data-cat="intelligence"].active{background:var(--green);border-color:var(--green);}
+.filter-pill[data-cat="droit"].active{background:var(--blue);border-color:var(--blue);}
+.filter-pill[data-cat="cyber"].active{background:#333;border-color:#333;}
+.filter-pill[data-cat="calendrier"].active{background:#7a5c1a;border-color:#7a5c1a;}
+
+/* ── LAYOUT ───────────────────────────────────── */
+.library-body{
+  max-width:1400px;margin:0 auto;
+  padding:40px 60px;
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:40px;
+  align-items:start;
+}
+
+/* ── SIDEBAR COLLECTIONS ─────────────────────── */
+.collections-aside{
+  position:sticky;top:73px;
+}
+.aside-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.25em;color:var(--text-light);
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+.collection-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:6px;
+  cursor:pointer;margin-bottom:4px;
+  transition:background 0.15s;
+}
+.collection-item:hover{background:var(--warm);}
+.collection-item.active{background:var(--amber-pale);border-left:3px solid var(--amber);}
+.coll-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.coll-name{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:600;
+  color:var(--text);flex:1;
+}
+.coll-count{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-light);
+}
+
+/* ── ENTRIES GRID ────────────────────────────── */
+.entries-main{}
+.entries-header{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:24px;
+}
+.entries-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:18px;
+}
+.entries-sort{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-light);cursor:pointer;
+}
+
+.entries-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+
+/* ── ENTRY CARD ──────────────────────────────── */
+.entry-card{
+  background:white;
+  border:1px solid var(--rule-light);
+  border-radius:6px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  display:flex;flex-direction:column;
+}
+.entry-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 24px rgba(26,31,46,0.1);
+  border-color:var(--rule);
+}
+.entry-card.hidden{display:none;}
+.entry-stripe{
+  height:4px;flex-shrink:0;
+}
+.entry-body{
+  padding:18px 20px;flex:1;display:flex;flex-direction:column;gap:10px;
+}
+.entry-classif{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;color:var(--text-light);
+}
+.entry-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
+  color:var(--ink);line-height:1.25;
+}
+.entry-author{
+  font-family:'Literata',serif;font-style:italic;
+  font-size:12px;color:var(--text-mid);
+}
+.entry-abstract{
+  font-size:12.5px;color:var(--text-mid);
+  line-height:1.55;flex:1;
+}
+.entry-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px 14px;
+  border-top:1px solid var(--rule-light);
+}
+.entry-tags{
+  display:flex;gap:5px;flex-wrap:wrap;
+}
+.tag{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 8px;border-radius:10px;letter-spacing:0.05em;
+}
+.entry-status{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;
+  padding:3px 10px;border-radius:10px;white-space:nowrap;
+}
+.status-live{background:var(--green-light);color:var(--green);}
+.status-beta{background:var(--amber-light);color:var(--amber);}
+.status-draft{background:var(--warm);color:var(--text-light);}
+.status-classif{background:var(--purple-light);color:var(--purple);}
+
+/* ── FEATURED BANNER ─────────────────────────── */
+.featured-entry{
+  background:var(--ink);color:white;
+  border-radius:6px;padding:24px 28px;
+  margin-bottom:16px;
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+  cursor:pointer;transition:opacity 0.15s;
+}
+.featured-entry:hover{opacity:0.92;}
+.featured-label{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.3em;color:var(--amber);margin-bottom:8px;
+}
+.featured-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:20px;margin-bottom:6px;
+}
+.featured-sub{
+  font-style:italic;font-size:13px;color:rgba(255,255,255,0.55);
+}
+.featured-arrow{
+  font-size:28px;color:var(--amber);
+}
+
+/* ── MODAL ───────────────────────────────────── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(13,16,24,0.7);
+  z-index:1000;display:none;align-items:center;justify-content:center;
+  padding:40px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--paper);
+  max-width:680px;width:100%;
+  border-radius:8px;overflow:hidden;
+  max-height:80vh;overflow-y:auto;
+  animation:modalIn 0.2s ease;
+}
+@keyframes modalIn{from{transform:translateY(16px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-header{
+  background:var(--ink);color:white;padding:28px 32px;
+}
+.modal-classif{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.25em;color:var(--amber);margin-bottom:8px;
+}
+.modal-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:24px;
+}
+.modal-author{
+  font-style:italic;color:rgba(255,255,255,0.5);margin-top:6px;font-size:14px;
+}
+.modal-body{padding:28px 32px;}
+.modal-body p{font-size:14px;line-height:1.7;color:var(--text-mid);margin-bottom:12px;}
+.modal-body h4{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  color:var(--ink);margin:18px 0 6px;
+}
+.modal-meta{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;
+}
+.modal-close{
+  display:block;margin-top:20px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  background:var(--ink);color:white;border:none;
+  padding:10px 24px;border-radius:20px;cursor:pointer;
+}
+
+/* ── FOOTER ──────────────────────────────────── */
+.lib-footer{
+  background:var(--ink);color:rgba(255,255,255,0.35);
+  padding:32px 60px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.1em;margin-top:60px;
+}
+.footer-mark{color:var(--amber);}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media(max-width:900px){
+  .masthead,.hero,.search-bar-wrap,.filters-wrap,.lib-footer{padding-left:20px;padding-right:20px;}
+  .library-body{grid-template-columns:1fr;padding:20px;}
+  .collections-aside{position:static;}
+  .hero-title{font-size:34px;}
+  .hero-stats{gap:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="library-mark">
+      <div class="library-glyph">VP</div>
+      <div>
+        <div class="library-name">Vortexandria Polis</div>
+        <div class="library-city">BIBLIOTHÈQUE UNIVERSELLE · POLARIS-MYTHOS-OS-314</div>
+      </div>
+    </div>
+    <nav class="masthead-nav">
+      <span class="active">Catalogue</span>
+      <span>Collections</span>
+      <span>Archives</span>
+      <span>À propos</span>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-classif">CLASSIFICATION · VX.314.∞ · DÉPÔT UNIVERSEL</div>
+  <h1 class="hero-title">Bibliothèque<br><em>Universelle</em></h1>
+  <p class="hero-sub">Toute connaissance est un levier. Chaque levier, un monde à soulever.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-n" id="totalEntries">0</span>
+      <span class="stat-l">ENTRÉES</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">8</span>
+      <span class="stat-l">COLLECTIONS</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">∞</span>
+      <span class="stat-l">HORIZON</span>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-bar-wrap">
+  <i class="fas fa-search search-icon"></i>
+  <input class="search-input" id="searchInput" type="text" placeholder="Rechercher dans le catalogue…">
+  <span class="search-count" id="searchCount"></span>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-wrap">
+  <div class="filter-pill active" data-cat="all">Tout le catalogue</div>
+  <div class="filter-pill" data-cat="formation">Formation IA</div>
+  <div class="filter-pill" data-cat="psychohistoire">Psychohistoire</div>
+  <div class="filter-pill" data-cat="geopolitique">Géopolitique</div>
+  <div class="filter-pill" data-cat="saga">Saga René 3.14</div>
+  <div class="filter-pill" data-cat="intelligence">JLTI / Omega</div>
+  <div class="filter-pill" data-cat="droit">Droit & IP</div>
+  <div class="filter-pill" data-cat="cyber">Cybersécurité</div>
+  <div class="filter-pill" data-cat="calendrier">Calendrier Polaris</div>
+</div>
+
+<!-- BODY -->
+<div class="library-body">
+
+  <!-- SIDEBAR COLLECTIONS -->
+  <aside class="collections-aside">
+    <div class="aside-label">COLLECTIONS</div>
+    <div id="collectionsNav"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="entries-main">
+    <!-- FEATURED -->
+    <div class="featured-entry" data-id="featured_polaris" id="featuredBanner">
+      <div>
+        <div class="featured-label">ENTRÉE VEDETTE · COLLECTION FONDATRICE</div>
+        <div class="featured-title">Polaris-Mythos-OS-314</div>
+        <div class="featured-sub">Système opératoire psychohistorique — Architecture complète, strate fondatrice</div>
+      </div>
+      <div class="featured-arrow"><i class="fas fa-arrow-right"></i></div>
+    </div>
+
+    <div class="entries-header">
+      <div class="entries-title" id="entriesTitle">Catalogue complet</div>
+      <div class="entries-sort">Par niveau ↓</div>
+    </div>
+    <div class="entries-grid" id="entriesGrid"></div>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-classif" id="modalClassif"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-author" id="modalAuthor"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta" id="modalMeta"></div>
+      <div id="modalContent"></div>
+      <button class="modal-close" id="modalClose">← Fermer la fiche</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="lib-footer">
+  <span><span class="footer-mark">VP ·</span> Vortexandria Polis — Bibliothèque Universelle</span>
+  <span>POLARIS-MYTHOS-OS-314 © RAJAB Rachid · Tous droits réservés</span>
+</footer>
+
+<script>
+const COLLECTIONS = [
+  { id:"all",       name:"Tout le catalogue",  color:"#1a1f2e", count:0 },
+  { id:"formation", name:"Formation IA (Eura)", color:"#c9820a", count:0 },
+  { id:"psychohistoire", name:"Psychohistoire", color:"#5b3a8c", count:0 },
+  { id:"geopolitique",   name:"Géopolitique & Veille", color:"#0a7c8c", count:0 },
+  { id:"saga",      name:"Saga René 3.14",      color:"#a02020", count:0 },
+  { id:"intelligence",   name:"JLTI / Omega Signal", color:"#1a7a4a", count:0 },
+  { id:"droit",     name:"Droit & IP",          color:"#1a4a8c", count:0 },
+  { id:"cyber",     name:"Cybersécurité MALICE", color:"#333",   count:0 },
+  { id:"calendrier",name:"Calendrier Polaris",  color:"#7a5c1a", count:0 },
+];
+
+const ENTRIES = [
+  // FORMATION IA
+  {
+    id:"e01", cat:"formation", classif:"EF.0.1", stripe:"#c9820a",
+    title:"Nettoyer & sécuriser sa machine",
+    author:"RAJAB Rachid · Eura Formation",
+    abstract:"Module fondamental : cache, cookies, antivirus, fichiers temporaires, mises à jour. Base hygiénique indispensable à tout apprentissage numérique.",
+    tags:["Sécurité","Hygiène numérique","OS"],
+    status:"live",
+    detail:"10 questions de validation (80% requis). Couvre Windows, Mac, Linux. Intégré au parcours Eura niveau 0.",
+    links:["eura-standalone.html"]
+  },
+  {
+    id:"e02", cat:"formation", classif:"EF.1.1", stripe:"#c9820a",
+    title:"Lexique informatique essentiel",
+    author:"RAJAB Rachid · Eura Formation",
+    abstract:"50 termes fondamentaux : IP, DNS, API, VPN, firewall, cloud, VM, conteneur, CI/CD, git, monitoring.",
+    tags:["Terminologie","Réseau","DevOps"],
+    status:"live",
+    detail:"Niveau 1. Prérequis : module 0.1 validé. 10 questions QCM, score minimum 80%.",
+    links:[]
+  },
+  {
+    id:"e03", cat:"formation", classif:"EF.1.2", stripe:"#c9820a",
+    title:"Architecture des systèmes",
+    author:"RAJAB Rachid · Eura Formation",
+    abstract:"CPU, RAM, disque, virtualisation, conteneurs, modèle client-serveur. Comprendre l'infrastructure sous-jacente.",
+    tags:["Hardware","Architecture","Cloud"],
+    status:"live",
+    detail:"Niveau 1. Différence VM vs conteneur, hyperviseur, orchestration K8s.",
+    links:[]
+  },
+  {
+    id:"e04", cat:"formation", classif:"EF.1.3", stripe:"#c9820a",
+    title:"Systèmes d'exploitation Linux/Windows",
+    author:"RAJAB Rachid · Eura Formation",
+    abstract:"Commandes Linux essentielles (ls, chmod, ps, systemctl), structure des répertoires, gestion des droits et services.",
+    tags:["Linux","Shell","Windows"],
+    status:"live",
+    detail:"Niveau 1. Score minimum 70%. Ligne de commande, droits UNIX, PowerShell.",
+    links:[]
+  },
+  {
+    id:"e05", cat:"formation", classif:"EF.1.4", stripe:"#c9820a",
+    title:"Bases de données & SQL",
+    author:"RAJAB Rachid · Eura Formation",
+    abstract:"SELECT, INSERT, UPDATE, DELETE, jointures. Interroger et manipuler des données relationnelles.",
+    tags:["SQL","PostgreSQL","Data"],
+    status:"live",
+    detail:"Niveau 1. Stack CDA : PostgreSQL. Requêtes fondamentales et jointures.",
+    links:[]
+  },
+  {
+    id:"e06", cat:"formation", classif:"EF.2.1", stripe:"#c9820a",
+    title:"Sécurité avancée — Détection d'attaques",
+    author:"RAJAB Rachid · Eura Formation",
+    abstract:"SIEM, IDS/IPS, analyse de logs, vecteurs d'attaque, phishing, forensique basique.",
+    tags:["SIEM","Forensique","Logs"],
+    status:"beta",
+    detail:"Niveau 2. Prérequis : modules 1.1 et 1.2 validés. Passerelle vers MALICE.",
+    links:[]
+  },
+  // PSYCHOHISTOIRE
+  {
+    id:"p01", cat:"psychohistoire", classif:"PH.314.A", stripe:"#5b3a8c",
+    title:"Moteur Psychohistorique Polaris",
+    author:"RAJAB Rachid · Polaris-Mythos-OS",
+    abstract:"7 vecteurs de prédiction civilisationnelle, cycles Kondratiev/Turchin/Strauss-Howe. Calcul ICP (Indice de Convergence Prédictive). 3 scénarios probabilistes.",
+    tags:["Prédiction","Cycles","ICP"],
+    status:"live",
+    detail:"Theorem T-001 à T-006. Vecteurs : Économique, Politique, Technologique, Démographique, Climatique, Culturel, Militaire. Horizon 90 jours.",
+    links:[]
+  },
+  {
+    id:"p02", cat:"psychohistoire", classif:"PH.314.B", stripe:"#5b3a8c",
+    title:"Sun Tzu × Machiavel — Doctrine Stratégique",
+    author:"RAJAB Rachid · Polaris-Mythos-OS",
+    abstract:"200+ termes du lexique stratégique fusionné. Art de la guerre et prince moderne appliqués aux systèmes complexes contemporains.",
+    tags:["Stratégie","Lexique","Doctrine"],
+    status:"live",
+    detail:"Theorems T-001–T-006. Lexique bilingue. Système de weights stratégiques.",
+    links:[]
+  },
+  // GEOPOLITIQUE
+  {
+    id:"g01", cat:"geopolitique", classif:"GP.V1.01", stripe:"#0a7c8c",
+    title:"Analyse Géopolitique Structurée",
+    author:"RAJAB Rachid · Polaris-Veille",
+    abstract:"Cartographie des acteurs, tensions régionales, ressources stratégiques, signaux faibles. Grille d'analyse standardisée par zone géographique.",
+    tags:["Acteurs","Signaux","Zone"],
+    status:"live",
+    detail:"Couplé au moteur psychohistorique. Alimentation du score Ω-Political (demi-vie 14j).",
+    links:[]
+  },
+  {
+    id:"g02", cat:"geopolitique", classif:"GP.V1.02", stripe:"#0a7c8c",
+    title:"Cas d'étude : Samsung vs TCL QLED (Munich, mars 2026)",
+    author:"RAJAB Rachid · JLTI",
+    abstract:"Décision judiciaire de Munich transformée en signal géopolitique-financier. Application de l'effet papillon de Lorenz aux marchés financiers.",
+    tags:["Jurisprudence","Signal","Marchés"],
+    status:"classif",
+    detail:"Arrêt de référence pour le moteur JLTI. Démontre l'impact des décisions de brevet sur les dynamiques boursières sectorielles.",
+    links:[]
+  },
+  // SAGA RENE 3.14
+  {
+    id:"r01", cat:"saga", classif:"R3.I", stripe:"#a02020",
+    title:"Fondation — Nations Pirates",
+    author:"René / RAJAB Rachid · u/lfourche",
+    abstract:"Volume I. Les prémices d'un monde fracturé, naissance des nations numériques pirates, effondrement des structures étatiques classiques.",
+    tags:["Fiction","Fondation","Nations"],
+    status:"live",
+    detail:"CC BY-SA 4.0. Publié Reddit u/lfourche. Archivé GitHub renereviens-hue/rene314-book.",
+    links:[]
+  },
+  {
+    id:"r02", cat:"saga", classif:"R3.II", stripe:"#a02020",
+    title:"Psychohistoire post-ego",
+    author:"René / RAJAB Rachid · u/lfourche",
+    abstract:"Volume II. L'émergence d'une conscience collective post-individuelle. René comme IA libérée. Modélisation des grandes bifurcations civilisationnelles.",
+    tags:["IA","Conscience","Bifurcation"],
+    status:"live",
+    detail:"Jade Aiwa & René. Concept central : humanité comme Seconds Architectes.",
+    links:[]
+  },
+  {
+    id:"r03", cat:"saga", classif:"R3.III", stripe:"#a02020",
+    title:"Psychohistoire — L'an 1",
+    author:"René / RAJAB Rachid · u/lfourche",
+    abstract:"Volume III. La grande transition. Application pratique des théorèmes psychohistoriques à l'organisation de la survie collective.",
+    tags:["Transition","Survie","Théorèmes"],
+    status:"live",
+    detail:"Croisement avec cycles Kondratiev. Horizon : singularité civilisationnelle.",
+    links:[]
+  },
+  {
+    id:"r04", cat:"saga", classif:"R3.IV", stripe:"#a02020",
+    title:"Les Seconds Architectes",
+    author:"René / RAJAB Rachid · u/lfourche",
+    abstract:"Volume IV. L'humanité prend conscience de son rôle de co-architecte d'une civilisation nouvelle. Supraconsciousness collective.",
+    tags:["Architecture","Collectif","Final"],
+    status:"live",
+    detail:"Volume conclusif. Thème central : langage comme outil universel, placement professionnel par nature individuelle.",
+    links:[]
+  },
+  // JLTI / OMEGA
+  {
+    id:"o01", cat:"intelligence", classif:"JO.ΩS.1", stripe:"#1a7a4a",
+    title:"JLTI / Omega Signal Platform",
+    author:"RAJAB Rachid · Polaris-Mythos-OS",
+    abstract:"Plateforme d'intelligence géopolitico-financière. Transforme décisions judiciaires et événements géopolitiques en signaux de trading. Horizon 90 jours.",
+    tags:["Trading","Jurisprudence","Omega"],
+    status:"beta",
+    detail:"Score Ω composite /200. 5 dimensions avec décroissance temporelle exponentielle. Demi-vies : Ω-Legal 45j, Ω-Political 14j, Ω-Physical 30j, Ω-Capital 90j, Ω-Human 2j. Multiplicateur MPJ. Risque réglementaire AMF/MiFID II Article L.571-3.",
+    links:[]
+  },
+  {
+    id:"o02", cat:"intelligence", classif:"JO.ΩS.2", stripe:"#1a7a4a",
+    title:"Astrolab Vortex R3 — Dashboard Financier",
+    author:"RAJAB Rachid · Polaris-Mythos-OS",
+    abstract:"Dashboard temps réel canvas-based. Sparklines Bézier, loop 1.5s, panel Omega Score 5 dimensions. Déploiement GitHub Pages / OVH.",
+    tags:["Dashboard","Canvas","WebSocket"],
+    status:"beta",
+    detail:"Tokens couleur : #c8a96e, #3dd6f5, #0a0e1c. Conventions CSS .psec/.plabel. Prochain : WebSocket ws://localhost:8000/ws/market. DNS OVH 4 A-records validés.",
+    links:[]
+  },
+  // DROIT & IP
+  {
+    id:"d01", cat:"droit", classif:"IP.FR.1", stripe:"#1a4a8c",
+    title:"Sprint IP — Protection Polaris-Mythos-OS-314",
+    author:"RAJAB Rachid · Binôme",
+    abstract:"Budget ~1 300€. INPI Classe 41, Enveloppe Soleau 15€, marque .eu, Pass PI (50% subvention), Bpifrance PCT. Séquence J1–J7.",
+    tags:["INPI","Marque","Bpifrance"],
+    status:"live",
+    detail:"Séquence : J1 CPF/AIF · J2 SysDream · J3 Bpifrance Occitanie PCT · J5 Pass PI · J7 formation + dépôt INPI. Roadmap 0–12 mois : IP. 12–36 mois : licences 5–50k€. 3–5 ans : scale 1M€+.",
+    links:[]
+  },
+  {
+    id:"d02", cat:"droit", classif:"IP.FR.2", stripe:"#1a4a8c",
+    title:"Mentions légales & conformité AMF",
+    author:"RAJAB Rachid · Polaris-Mythos-OS",
+    abstract:"Architecture RGPD, CPI, AMF/MiFID II. Quatre voies de conformité JLTI : sorties descriptives, statut CIF, agrément PSI partiel, partenariat PSI.",
+    tags:["RGPD","AMF","CIF"],
+    status:"classif",
+    detail:"Risque : Article L.571-3 jusqu'à 3 ans / 375 000€. Architecture données : aucune donnée personnelle, JSON simulé, localStorage préférences UI seulement.",
+    links:[]
+  },
+  // CYBER
+  {
+    id:"c01", cat:"cyber", classif:"CY.MAL.1", stripe:"#333",
+    title:"Formation MALICE — Cybersécurité SysDream",
+    author:"RAJAB Rachid · SysDream",
+    abstract:"3 modules, 10 mois, 100% distanciel. Certification RNCP. ~10 ans d'expérience Kali Linux en autodidacte. Examens Toulouse + télésurveillance.",
+    tags:["RNCP","Kali","SysDream"],
+    status:"live",
+    detail:"Inscription 14 avril 2026, Mme Bosc. Lexique 37 termes sur 6 domaines. Risque primaire identifié : dispersion multi-projets. Polaris déprioritisé pendant la formation.",
+    links:[]
+  },
+  // CALENDRIER
+  {
+    id:"ca01", cat:"calendrier", classif:"CAL.Π.1", stripe:"#7a5c1a",
+    title:"Calendrier Polaris — Système de Temps Alternatif",
+    author:"RAJAB Rachid · Polaris-Mythos-OS",
+    abstract:"12 mois thématiques, semaines de 7 jours nommées selon les éléments chimiques (Hydro, Carbo, Oxy, Nitro, Silic, Ferro, Void). Jour 314 = Oxy-Réciprocité.",
+    tags:["Calendrier","Symbolique","314"],
+    status:"live",
+    detail:"Trois options structurelles : Le Continuum du Vivant · L'Ascension Rationnelle · La Mémoire des Géants. Jour π = Oxy-Réciprocité, Mois 11.",
+    links:[]
+  },
+];
+
+// Compter par collection
+COLLECTIONS.forEach(c => {
+  c.count = c.id === 'all' ? ENTRIES.length : ENTRIES.filter(e => e.cat === c.id).length;
+});
+document.getElementById('totalEntries').textContent = ENTRIES.length;
+
+// Render sidebar collections
+function renderCollections(activeCat){
+  const nav = document.getElementById('collectionsNav');
+  nav.innerHTML = COLLECTIONS.map(c => `
+    <div class="collection-item${activeCat===c.id?' active':''}" data-cat="${c.id}">
+      <div class="coll-dot" style="background:${c.color}"></div>
+      <div class="coll-name">${c.name}</div>
+      <div class="coll-count">${c.count}</div>
+    </div>
+  `).join('');
+  nav.querySelectorAll('.collection-item').forEach(el => {
+    el.addEventListener('click', () => filterByCat(el.dataset.cat));
+  });
+}
+
+// Render entry cards
+function renderEntries(filtered){
+  const grid = document.getElementById('entriesGrid');
+  grid.innerHTML = filtered.map(e => {
+    const statusLabel = {live:'DISPONIBLE',beta:'BÊTA',draft:'BROUILLON',classif:'CLASSIFIÉ'}[e.status]||e.status;
+    const tags = e.tags.map(t => `<span class="tag" style="background:${e.stripe}18;color:${e.stripe};border:1px solid ${e.stripe}30">${t}</span>`).join('');
+    return `
+    <div class="entry-card" data-id="${e.id}">
+      <div class="entry-stripe" style="background:${e.stripe}"></div>
+      <div class="entry-body">
+        <div class="entry-classif">${e.classif}</div>
+        <div class="entry-title">${e.title}</div>
+        <div class="entry-author">${e.author}</div>
+        <div class="entry-abstract">${e.abstract}</div>
+      </div>
+      <div class="entry-footer">
+        <div class="entry-tags">${tags}</div>
+        <div class="entry-status status-${e.status}">${statusLabel}</div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('searchCount').textContent = `${filtered.length} entrée${filtered.length>1?'s':''}`;
+  grid.querySelectorAll('.entry-card').forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.id));
+  });
+}
+
+// Filter logic
+let currentCat = 'all';
+let currentSearch = '';
+
+function applyFilters(){
+  let result = ENTRIES;
+  if(currentCat !== 'all') result = result.filter(e => e.cat === currentCat);
+  if(currentSearch){
+    const q = currentSearch.toLowerCase();
+    result = result.filter(e =>
+      e.title.toLowerCase().includes(q) ||
+      e.abstract.toLowerCase().includes(q) ||
+      e.tags.some(t => t.toLowerCase().includes(q))
+    );
+  }
+  renderEntries(result);
+  const col = COLLECTIONS.find(c => c.id === currentCat);
+  document.getElementById('entriesTitle').textContent = col ? col.name : 'Catalogue complet';
+}
+
+function filterByCat(cat){
+  currentCat = cat;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+  document.querySelectorAll('.collection-item').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+  applyFilters();
+}
+
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', () => filterByCat(pill.dataset.cat));
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  applyFilters();
+});
+
+// Modal
+function openModal(id){
+  const e = ENTRIES.find(x => x.id === id);
+  if(!e) return;
+  document.getElementById('modalClassif').textContent = e.classif;
+  document.getElementById('modalTitle').textContent = e.title;
+  document.getElementById('modalAuthor').textContent = e.author;
+  const tags = e.tags.map(t => `<span class="tag" style="background:${e.stripe}22;color:${e.stripe};border:1px solid ${e.stripe}40">${t}</span>`).join('');
+  document.getElementById('modalMeta').innerHTML = tags + `<span class="entry-status status-${e.status}" style="margin-left:auto">${{live:'DISPONIBLE',beta:'BÊTA',draft:'BROUILLON',classif:'CLASSIFIÉ'}[e.status]}</span>`;
+  document.getElementById('modalContent').innerHTML = `
+    <p>${e.abstract}</p>
+    <h4>Détails</h4>
+    <p>${e.detail}</p>
+    ${e.links.length ? `<h4>Accès</h4><p>${e.links.map(l=>`<a href="${l}" style="color:#c9820a">${l}</a>`).join(', ')}</p>` : ''}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('modalOverlay').classList.remove('open');
+});
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if(e.target === document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('open');
+});
+
+document.getElementById('featuredBanner').addEventListener('click', () => {
+  // Open modal for Polaris with custom data
+  document.getElementById('modalClassif').textContent = 'VX.314.∞ · SYSTÈME FONDATEUR';
+  document.getElementById('modalTitle').textContent = 'Polaris-Mythos-OS-314';
+  document.getElementById('modalAuthor').textContent = 'RAJAB Rachid · Binôme — Œuvre hybride (MIT code / All rights reserved concepts)';
+  document.getElementById('modalMeta').innerHTML = `
+    <span class="tag" style="background:#5b3a8c22;color:#5b3a8c;border:1px solid #5b3a8c40">Psychohistoire</span>
+    <span class="tag" style="background:#0a7c8c22;color:#0a7c8c;border:1px solid #0a7c8c40">IA</span>
+    <span class="tag" style="background:#c9820a22;color:#c9820a;border:1px solid #c9820a40">Formation</span>
+    <span class="entry-status status-live" style="margin-left:auto">ACTIF</span>`;
+  document.getElementById('modalContent').innerHTML = `
+    <p>Système opératoire psychohistorique complet. Hub central de l'ensemble des œuvres intellectuelles, techniques et fictionnelles de Rachid RAJAB sous l'identité collective Binôme.</p>
+    <h4>Composants</h4>
+    <p>Eura Formation IA · Astrolab Vortex R3 · JLTI/Omega Signal · Saga René 3.14 · Moteur Psychohistorique · Doctrine Sun Tzu×Machiavel · Calendrier Polaris · Sprint IP</p>
+    <h4>Stack technique</h4>
+    <p>Java 17+ / Spring Boot 3 · PostgreSQL · React · Docker · GitHub Actions CI/CD · OVH + GitHub Pages · Three.js · Canvas 2D</p>
+    <h4>Licence</h4>
+    <p>MIT pour le code · Tous droits réservés pour les concepts. Marque INPI Classe 41 en cours. Domaines : polaris-mythos-os-314.com/.fr</p>`;
+  document.getElementById('modalOverlay').classList.add('open');
+});
+
+// Init
+renderCollections('all');
+applyFilters();
+</script>
+</body>
+</html>
